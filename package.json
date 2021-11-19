@@ -4,7 +4,8 @@
   "description": "Sentence case and title case with multi-language support",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build": "babel src -d dist"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,16 @@
     "title",
     "case"
   ],
-  "author": "",
+  "author": "nemrow",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/woflowinc/true-case/issues"
   },
-  "homepage": "https://github.com/woflowinc/true-case#readme"
+  "homepage": "https://github.com/woflowinc/true-case#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "jest": "^27.3.1"
+  }
 }
