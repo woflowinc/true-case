@@ -1,4 +1,5 @@
-import { capitalizeCharAt, shouldSentenceCaseCapitalize } from '../utils/helpers';
+import { shouldSentenceCaseCapitalize } from '../utils/casingConditions';
+import { capitalizedWord } from '../utils/helpers';
 import wordObjectsBuilder from '../utils/wordObjectsBuilder';
 
 const sentenceCase = ({ string, language: unformattedLanguage }) => {
@@ -6,14 +7,9 @@ const sentenceCase = ({ string, language: unformattedLanguage }) => {
 
   return wordObjects
     .map((wordObject) => {
-      if (shouldSentenceCaseCapitalize(wordObject)) {
-        return capitalizeCharAt({
-          string: wordObject.rawString,
-          index: wordObject.firstValidCharIndex,
-        });
-      }
-
-      return wordObject.rawString;
+      return shouldSentenceCaseCapitalize(wordObject)
+        ? capitalizedWord(wordObject)
+        : wordObject.rawString;
     })
     .join(' ');
 };

@@ -1,8 +1,7 @@
+import abbreviations from '../configs/abbreviations';
+import { DEFAULT_LANGUAGE } from '../configs/constants';
 import smallWords from '../configs/smallWords';
-
-const WORD_BOUNDARY_CHARS = ['.', '!', '?'];
-const DEFAULT_LANGUAGE = 'en';
-const WHITELISTED_HARD_STOP_WORDS = ['oz.'];
+import wordBoundaryChars from '../configs/wordBoundaryChars';
 
 const firstValidCharIndex = (word) => {
   const reg = new RegExp(/[\p{L}]/u);
@@ -14,9 +13,14 @@ const isWhitelistedSmallWord = ({ word, language, region }) => {
   return smallWordsList.indexOf(word) >= 0;
 };
 
-const isSentenceBoundary = (word) => {
-  if (WORD_BOUNDARY_CHARS.indexOf(word.slice(-1)) < 0) return false;
-  return WHITELISTED_HARD_STOP_WORDS.indexOf(word) < 0;
+const isSentenceBoundary = ({ word, language }) => {
+  // Does word end with a boundary char? (Sentence ending character)
+  if (wordBoundaryChars.indexOf(word.slice(-1)) < 0) return false;
+
+  // Is the boundary word actually just an abbreviation?
+  // Ex: "12 oz. steak" - "oz." is not the end of the sentence
+  const abbreviationsList = abbreviations[language] || abbreviations[DEFAULT_LANGUAGE];
+  return abbreviationsList.indexOf(word) < 0;
 };
 
 const formatLanguage = (unformattedLanguage) => {
@@ -24,36 +28,9 @@ const formatLanguage = (unformattedLanguage) => {
   return { language, region };
 };
 
-const shouldTitleCaseCapitalize = (wordObject) => {
-  // no char available to capitalize
-  if (wordObject.firstValidCharIndex < 0) return false;
-
-  // All words (including whitelisted words) are capitalized at the end of a sentence
-  if (wordObject.activeSentenceBoundary) return true;
-
-  // Capitalize beginning of each sentence
-  if (wordObject.firstWordOfSentence) return true;
-
-  // Do not capitalize whitelisted words
-  if (wordObject.isWhitelisted) return false;
-
-  // All other words should be capitalized
-  return true;
-};
-
-const shouldSentenceCaseCapitalize = (wordObject) => {
-  // no char available to capitalize
-  if (wordObject.firstValidCharIndex < 0) return false;
-
-  // Capitalize beginning of each sentence
-  if (wordObject.firstWordOfSentence) return true;
-
-  // All other word should be lowercase
-  return false;
-};
-
-const capitalizeCharAt = ({ string, index }) => {
-  const chars = string.split('');
+const capitalizedWord = (wordObject) => {
+  const chars = wordObject.rawString.split('');
+  const index = wordObject.firstValidCharIndex;
   chars[index] = chars[index].toUpperCase();
   return chars.join('');
 };
@@ -63,7 +40,5 @@ export {
   isWhitelistedSmallWord,
   isSentenceBoundary,
   formatLanguage,
-  capitalizeCharAt,
-  shouldTitleCaseCapitalize,
-  shouldSentenceCaseCapitalize,
+  capitalizedWord,
 };
