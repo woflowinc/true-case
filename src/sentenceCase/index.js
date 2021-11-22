@@ -1,15 +1,12 @@
-import { formatLanguage, capitalizeCharAt } from '../utils/helpers';
+import { capitalizeCharAt, shouldSentenceCaseCapitalize } from '../utils/helpers';
 import wordObjectsBuilder from '../utils/wordObjectsBuilder';
 
 const sentenceCase = ({ string, language: unformattedLanguage }) => {
-  if (!string) return '';
-
-  const { language, region } = formatLanguage(unformattedLanguage);
-  const wordObjects = wordObjectsBuilder({ string: string.toLowerCase(), language, region });
+  const wordObjects = wordObjectsBuilder({ string, unformattedLanguage });
 
   return wordObjects
     .map((wordObject) => {
-      if (wordObject.firstWordOfSentence && wordObject.firstValidCharIndex >= 0) {
+      if (shouldSentenceCaseCapitalize(wordObject)) {
         return capitalizeCharAt({
           string: wordObject.rawString,
           index: wordObject.firstValidCharIndex,

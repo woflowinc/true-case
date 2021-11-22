@@ -1,27 +1,16 @@
-import smallWords from '../configs/smallWords';
+import {
+  firstValidCharIndex,
+  isWhitelistedSmallWord,
+  isSentenceBoundary,
+  formatLanguage,
+} from './helpers';
 
-const WORD_BOUNDARY_CHARS = ['.', '!', '?'];
-const DEFAULT_LANGUAGE = 'en';
-const WHITELISTED_HARD_STOP_WORDS = ['oz.'];
+const wordObjectsBuilder = ({ string, unformattedLanguage }) => {
+  if (!string) return [];
 
-const firstValidCharIndex = (string) => {
-  const reg = new RegExp(/[\p{L}]/u);
-  return string.search(reg);
-};
-
-const isWhitelisted = ({ string, language, region }) => {
-  const smallWordsList = smallWords[language] || smallWords[DEFAULT_LANGUAGE];
-  return smallWordsList.indexOf(string) >= 0;
-};
-
-const isSentenceBoundary = (word) => {
-  if (WORD_BOUNDARY_CHARS.indexOf(word.slice(-1)) < 0) return false;
-  return WHITELISTED_HARD_STOP_WORDS.indexOf(word) < 0;
-};
-
-const wordObjectsBuilder = ({ string, language, region }) => {
+  const { language, region } = formatLanguage(unformattedLanguage);
   var activeSentenceBoundary = true;
-  const words = string.split(' ');
+  const words = string.toLowerCase().split(' ');
 
   return words.map((word, index) => {
     // is directly after a word boundary or is the beginning of a quoted string
@@ -31,7 +20,7 @@ const wordObjectsBuilder = ({ string, language, region }) => {
 
     return {
       rawString: word,
-      isWhitelisted: isWhitelisted({ string: word, language, region }),
+      isWhitelisted: isWhitelistedSmallWord({ word, language, region }),
       firstValidCharIndex: firstValidCharIndex(word),
       activeSentenceBoundary,
       firstWordOfSentence,
