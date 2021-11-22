@@ -18,7 +18,11 @@ testCases.forEach((testCase) => {
     cases.forEach((scenario) => {
       test(`When transforming "${scenario.input}" to ${casingType} in ${testCase.language}`, () => {
         expect(
-          functionSelector(casingType)({ string: scenario.input, language: testCase.language })
+          functionSelector(casingType)({
+            string: scenario.input,
+            language: testCase.language,
+            trueCasing: scenario.trueCasing,
+          })
         ).toBe(scenario.output);
       });
     });

@@ -39,6 +39,11 @@ export default [
           input: null,
           output: '',
         },
+        {
+          input: 'this is a McDonalds McChicken sandwich with fries',
+          output: 'This is a McDonalds McChicken Sandwich with Fries',
+          trueCasing: true,
+        },
       ],
       sentenceCase: [
         {
@@ -64,6 +69,11 @@ export default [
         {
           input: null,
           output: '',
+        },
+        {
+          input: 'this is a McDonalds McChicken sandwich with fries',
+          output: 'This is a McDonalds McChicken sandwich with fries',
+          trueCasing: true,
         },
       ],
     },

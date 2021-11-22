@@ -29,10 +29,14 @@ const formatLanguage = (unformattedLanguage) => {
 };
 
 const capitalizedWord = (wordObject) => {
-  const chars = wordObject.rawString.split('');
+  const chars = wordObject.value.split('');
   const index = wordObject.firstValidCharIndex;
   chars[index] = chars[index].toUpperCase();
   return chars.join('');
+};
+
+const isProperNoun = ({ word, trueCasing }) => {
+  return trueCasing && word.toLowerCase() !== word;
 };
 
 export {
@@ -41,4 +45,5 @@ export {
   isSentenceBoundary,
   formatLanguage,
   capitalizedWord,
+  isProperNoun,
 };
