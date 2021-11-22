@@ -31,33 +31,41 @@ export default [
           input: 'this is a test',
           output: 'This is a Test',
         },
+        {
+          input: '',
+          output: '',
+        },
+        {
+          input: null,
+          output: '',
+        },
       ],
-      // sentenceCase: [
-      //   {
-      //     input: 'THIS IS A TEST',
-      //     output: 'This is a test',
-      //   },
-      //   {
-      //     input: 'he walked in. "hi," he said! she replied, "yes?" "oh, nevermind."',
-      //     output: 'He walked in. "Hi," he said! She replied, "Yes?" "Oh, nevermind."',
-      //   },
-      //   {
-      //     input: 'the 12 oz. drink was cold',
-      //     output: 'The 12 oz. drink was cold',
-      //   },
-      //   {
-      //     input: "We can't stop",
-      //     output: "We can't stop",
-      //   },
-      //   {
-      //     input: '',
-      //     output: '',
-      //   },
-      //   {
-      //     input: null,
-      //     output: '',
-      //   },
-      // ],
+      sentenceCase: [
+        {
+          input: 'THIS IS A TEST',
+          output: 'This is a test',
+        },
+        {
+          input: 'he walked in. "hi," he said! she replied, "yes?" "oh, nevermind."',
+          output: 'He walked in. "Hi," he said! She replied, "Yes?" "Oh, nevermind."',
+        },
+        {
+          input: 'the 12 oz. drink was cold',
+          output: 'The 12 oz. drink was cold',
+        },
+        {
+          input: "We can't stop",
+          output: "We can't stop",
+        },
+        {
+          input: '',
+          output: '',
+        },
+        {
+          input: null,
+          output: '',
+        },
+      ],
     },
   },
   {

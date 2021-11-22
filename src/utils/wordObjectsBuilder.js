@@ -2,6 +2,7 @@ import smallWords from '../configs/smallWords';
 
 const WORD_BOUNDARY_CHARS = ['.', '!', '?'];
 const DEFAULT_LANGUAGE = 'en';
+const WHITELISTED_HARD_STOP_WORDS = ['oz.'];
 
 const firstValidCharIndex = (string) => {
   const reg = new RegExp(/[\p{L}]/u);
@@ -13,14 +14,20 @@ const isWhitelisted = ({ string, language, region }) => {
   return smallWordsList.indexOf(string) >= 0;
 };
 
+const isSentenceBoundary = (word) => {
+  if (WORD_BOUNDARY_CHARS.indexOf(word.slice(-1)) < 0) return false;
+  return WHITELISTED_HARD_STOP_WORDS.indexOf(word) < 0;
+};
+
 const wordObjectsBuilder = ({ string, language, region }) => {
   var activeSentenceBoundary = true;
   const words = string.split(' ');
 
   return words.map((word, index) => {
-    const firstWordOfSentence = activeSentenceBoundary;
-    activeSentenceBoundary =
-      WORD_BOUNDARY_CHARS.indexOf(word.slice(-1)) >= 0 || index == words.length - 1;
+    // is directly after a word boundary or is the beginning of a quoted string
+    const firstWordOfSentence = activeSentenceBoundary || word.slice(0, 1) === '"';
+
+    activeSentenceBoundary = isSentenceBoundary(word) || index == words.length - 1;
 
     return {
       rawString: word,

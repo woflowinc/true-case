@@ -1,20 +1,11 @@
+import { formatLanguage, capitalizeCharAt } from '../utils/helpers';
 import wordObjectsBuilder from '../utils/wordObjectsBuilder';
 
-const capitalizeCharAt = ({ string, index }) => {
-  const chars = string.split('');
-  chars[index] = chars[index].toUpperCase();
-  return chars.join('');
-};
-
-const formatLanguage = (unformattedLanguage) => {
-  const [language, region] = unformattedLanguage.toLowerCase().split('_');
-  return { language, region };
-};
-
 const titleCase = ({ string, language: unformattedLanguage }) => {
+  if (!string) return '';
+
   const { language, region } = formatLanguage(unformattedLanguage);
   const wordObjects = wordObjectsBuilder({ string: string.toLowerCase(), language, region });
-  console.log('wordObjects', wordObjects);
 
   return wordObjects
     .map((wordObject) => {
