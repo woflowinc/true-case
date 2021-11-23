@@ -26,14 +26,14 @@ var argumentValidator = function argumentValidator(_ref) {
   }
 
   var invalidProperNouns = properNouns.filter(function (properNoun) {
-    return !(properNoun instanceof String);
+    return typeof properNoun !== 'string';
   });
 
   if (invalidProperNouns.length > 0) {
     throw "Invalid proper noun types: ".concat(invalidProperNouns);
   }
 
-  if (!(typeof trueCasing == 'boolean')) {
+  if (typeof trueCasing !== 'boolean') {
     throw 'trueCasing should be a boolean';
   }
 };

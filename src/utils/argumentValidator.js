@@ -14,14 +14,14 @@ const argumentValidator = ({ unformattedLanguage, trueCasing, properNouns }) => 
   }
 
   const invalidProperNouns = properNouns.filter((properNoun) => {
-    return !(properNoun instanceof String);
+    return typeof properNoun !== 'string';
   });
 
   if (invalidProperNouns.length > 0) {
     throw `Invalid proper noun types: ${invalidProperNouns}`;
   }
 
-  if (!(typeof trueCasing == 'boolean')) {
+  if (typeof trueCasing !== 'boolean') {
     throw 'trueCasing should be a boolean';
   }
 };
