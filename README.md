@@ -89,6 +89,44 @@ Output
 I want to get some McDonalds. Do you want to come?
 ```
 
+### Supplied Proper Nouns
+
+You can supply a list of proper nouns to maintain specific casing for them
+
+```javascript
+import { sentenceCase } from 'true-case';
+
+const string = 'i want to get some McDonalds. do you want to come?';
+
+sentenceCase(string, { properNouns: ['McDonalds'] });
+```
+
+Output
+
+```
+I want to get some McDonalds. Do you want to come?
+```
+
+Supplying proper nouns will override any casing from the input
+
+Example:
+
+```javascript
+import { sentenceCase } from 'true-case';
+
+const string = 'i want to get some mcdonalds. do you want to come?';
+
+sentenceCase(string, { properNouns: ['McDonalds'] });
+```
+
+Output
+
+```
+I want to get some McDonalds. Do you want to come?
+```
+
+Notice `mcdonalds` is all lowercased on the input but transforms into the casing given by the `properNouns`
+
 ## Installation
 
 ```

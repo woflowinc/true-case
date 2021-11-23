@@ -25,6 +25,7 @@ testCases.forEach((testCase) => {
           functionSelector(casingType)(scenario.input, {
             language: testCase.language,
             trueCasing: scenario.trueCasing,
+            properNouns: scenario.properNouns,
           })
         ).toBe(scenario.output);
       });

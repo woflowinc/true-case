@@ -44,6 +44,11 @@ export default [
           output: 'This is a McDonalds McChicken Sandwich with Fries',
           trueCasing: true,
         },
+        {
+          input: 'THIS IS A MCDONALDS MCCHICKEN SANDWICH WITH FRIES',
+          output: 'This is a McDonalds McChicken Sandwich with Fries',
+          properNouns: ['McDonalds', 'McChicken'],
+        },
       ],
       sentenceCase: [
         {
@@ -74,6 +79,16 @@ export default [
           input: 'this is a McDonalds McChicken sandwich with fries',
           output: 'This is a McDonalds McChicken sandwich with fries',
           trueCasing: true,
+        },
+        {
+          input: 'This is a McDonalds McChicken Sandwich with Fries',
+          output: 'This is a McDonalds McChicken sandwich with fries',
+          properNouns: ['McDonalds', 'McChicken'],
+        },
+        {
+          input: 'THIS IS A MCDONALDS MCCHICKEN SANDWICH WITH FRIES',
+          output: 'This is a McDonalds McChicken sandwich with fries',
+          properNouns: ['McDonalds', 'McChicken'],
         },
       ],
     },

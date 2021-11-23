@@ -5,9 +5,9 @@ import wordObjectsBuilder from '../utils/wordObjectsBuilder';
 
 const sentenceCase = (
   string,
-  { language: unformattedLanguage = DEFAULT_LANGUAGE, trueCasing = false } = {}
+  { language: unformattedLanguage = DEFAULT_LANGUAGE, trueCasing = false, properNouns = [] } = {}
 ) => {
-  const wordObjects = wordObjectsBuilder({ string, unformattedLanguage, trueCasing });
+  const wordObjects = wordObjectsBuilder({ string, unformattedLanguage, trueCasing, properNouns });
 
   return wordObjects
     .map((wordObject) => {

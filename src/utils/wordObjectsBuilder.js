@@ -3,10 +3,10 @@ import {
   isWhitelistedSmallWord,
   isSentenceBoundary,
   formatLanguage,
-  isProperNoun,
+  casedValue,
 } from './helpers';
 
-const wordObjectsBuilder = ({ string, unformattedLanguage, trueCasing }) => {
+const wordObjectsBuilder = ({ string, unformattedLanguage, trueCasing, properNouns }) => {
   if (!string) return [];
 
   const { language, region } = formatLanguage(unformattedLanguage);
@@ -15,7 +15,7 @@ const wordObjectsBuilder = ({ string, unformattedLanguage, trueCasing }) => {
 
   return words.map((word, index) => {
     // Maintain raw casing if proper noun
-    const value = isProperNoun({ word, trueCasing }) ? word : word.toLowerCase();
+    const value = casedValue({ word, trueCasing, properNouns });
 
     // is directly after a word boundary or is the beginning of a quoted string
     const firstWordOfSentence = activeSentenceBoundary || word.slice(0, 1) === '"';

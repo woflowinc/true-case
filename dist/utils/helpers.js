@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isWhitelistedSmallWord = exports.isSentenceBoundary = exports.isProperNoun = exports.formatLanguage = exports.firstValidCharIndex = exports.capitalizedWord = void 0;
+exports.isWhitelistedSmallWord = exports.isSentenceBoundary = exports.formatLanguage = exports.firstValidCharIndex = exports.casedValue = exports.capitalizedWord = void 0;
 
 var _abbreviations = _interopRequireDefault(require("../configs/abbreviations"));
 
@@ -40,7 +40,7 @@ var isWhitelistedSmallWord = function isWhitelistedSmallWord(_ref) {
       region = _ref.region;
   var smallWordsList = _smallWords["default"][language] || _smallWords["default"][_constants.DEFAULT_LANGUAGE];
   var regexList = smallWordsList.map(function (smallWord) {
-    return new RegExp("^".concat(smallWord, "$"));
+    return new RegExp("^".concat(smallWord, "$"), 'i');
   });
   return regexList.some(function (rx) {
     return rx.test(word);
@@ -87,10 +87,39 @@ var capitalizedWord = function capitalizedWord(wordObject) {
 
 exports.capitalizedWord = capitalizedWord;
 
-var isProperNoun = function isProperNoun(_ref3) {
+var _properNounMatch = function _properNounMatch(_ref3) {
   var word = _ref3.word,
-      trueCasing = _ref3.trueCasing;
-  return trueCasing && word.toLowerCase() !== word;
+      properNouns = _ref3.properNouns;
+  var regexList = properNouns.map(function (properNoun) {
+    return {
+      value: properNoun,
+      reg: new RegExp("^".concat(properNoun.toLowerCase(), "$"), 'i')
+    };
+  });
+  return regexList.find(function (properNounData) {
+    return properNounData.reg.test(word);
+  });
 };
 
-exports.isProperNoun = isProperNoun;
+var casedValue = function casedValue(_ref4) {
+  var word = _ref4.word,
+      trueCasing = _ref4.trueCasing,
+      properNouns = _ref4.properNouns;
+
+  // return early if word matches supplied proper noun
+  var properNounMatch = _properNounMatch({
+    word: word,
+    properNouns: properNouns
+  });
+
+  if (properNounMatch) {
+    return properNounMatch.value;
+  } // when trueCasing flagged, we consider any word proper noun when upper cased chars present
+
+
+  if (trueCasing && word.toLowerCase() !== word) return word; // all other words are defaulted to lowercase
+
+  return word.toLowerCase();
+};
+
+exports.casedValue = casedValue;

@@ -10,7 +10,7 @@ const firstValidCharIndex = (word) => {
 
 const isWhitelistedSmallWord = ({ word, language, region }) => {
   const smallWordsList = smallWords[language] || smallWords[DEFAULT_LANGUAGE];
-  const regexList = smallWordsList.map((smallWord) => new RegExp(`^${smallWord}$`));
+  const regexList = smallWordsList.map((smallWord) => new RegExp(`^${smallWord}$`, 'i'));
   return regexList.some((rx) => rx.test(word));
 };
 
@@ -36,8 +36,29 @@ const capitalizedWord = (wordObject) => {
   return chars.join('');
 };
 
-const isProperNoun = ({ word, trueCasing }) => {
-  return trueCasing && word.toLowerCase() !== word;
+const _properNounMatch = ({ word, properNouns }) => {
+  const regexList = properNouns.map((properNoun) => {
+    return {
+      value: properNoun,
+      reg: new RegExp(`^${properNoun.toLowerCase()}$`, 'i'),
+    };
+  });
+
+  return regexList.find((properNounData) => properNounData.reg.test(word));
+};
+
+const casedValue = ({ word, trueCasing, properNouns }) => {
+  // return early if word matches supplied proper noun
+  const properNounMatch = _properNounMatch({ word, properNouns });
+  if (properNounMatch) {
+    return properNounMatch.value;
+  }
+
+  // when trueCasing flagged, we consider any word proper noun when upper cased chars present
+  if (trueCasing && word.toLowerCase() !== word) return word;
+
+  // all other words are defaulted to lowercase
+  return word.toLowerCase();
 };
 
 export {
@@ -46,5 +67,5 @@ export {
   isSentenceBoundary,
   formatLanguage,
   capitalizedWord,
-  isProperNoun,
+  casedValue,
 };

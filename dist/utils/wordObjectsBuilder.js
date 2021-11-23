@@ -10,7 +10,8 @@ var _helpers = require("./helpers");
 var wordObjectsBuilder = function wordObjectsBuilder(_ref) {
   var string = _ref.string,
       unformattedLanguage = _ref.unformattedLanguage,
-      trueCasing = _ref.trueCasing;
+      trueCasing = _ref.trueCasing,
+      properNouns = _ref.properNouns;
   if (!string) return [];
 
   var _formatLanguage = (0, _helpers.formatLanguage)(unformattedLanguage),
@@ -21,10 +22,11 @@ var wordObjectsBuilder = function wordObjectsBuilder(_ref) {
   var words = string.split(' ');
   return words.map(function (word, index) {
     // Maintain raw casing if proper noun
-    var value = (0, _helpers.isProperNoun)({
+    var value = (0, _helpers.casedValue)({
       word: word,
-      trueCasing: trueCasing
-    }) ? word : word.toLowerCase(); // is directly after a word boundary or is the beginning of a quoted string
+      trueCasing: trueCasing,
+      properNouns: properNouns
+    }); // is directly after a word boundary or is the beginning of a quoted string
 
     var firstWordOfSentence = activeSentenceBoundary || word.slice(0, 1) === '"';
     activeSentenceBoundary = (0, _helpers.isSentenceBoundary)({
