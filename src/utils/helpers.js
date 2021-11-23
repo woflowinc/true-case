@@ -24,7 +24,7 @@ const isSentenceBoundary = ({ word, language }) => {
   return abbreviationsList.indexOf(word) < 0;
 };
 
-const formatLanguage = (unformattedLanguage) => {
+const formatLanguage = (unformattedLanguage = DEFAULT_LANGUAGE) => {
   const [language, region] = unformattedLanguage.toLowerCase().split('_');
   return { language, region };
 };

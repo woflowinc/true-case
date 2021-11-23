@@ -1,6 +1,10 @@
 import { titleCase, sentenceCase } from 'true-case';
 import testCases from './testCases';
 
+const INPUT = 'this is a test';
+const SENTENCE_OUTPUT = 'This is a test';
+const TITLE_OUTPUT = 'This is a Test';
+
 const functionSelector = (casingType) => {
   switch (casingType) {
     case 'titleCase':
@@ -18,8 +22,7 @@ testCases.forEach((testCase) => {
     cases.forEach((scenario) => {
       test(`When transforming "${scenario.input}" to ${casingType} in ${testCase.language}`, () => {
         expect(
-          functionSelector(casingType)({
-            string: scenario.input,
+          functionSelector(casingType)(scenario.input, {
             language: testCase.language,
             trueCasing: scenario.trueCasing,
           })
@@ -27,4 +30,24 @@ testCases.forEach((testCase) => {
       });
     });
   });
+});
+
+test(`When not including any options`, () => {
+  expect(titleCase(INPUT)).toBe(TITLE_OUTPUT);
+});
+
+test(`When not including any options`, () => {
+  expect(sentenceCase(INPUT)).toBe(SENTENCE_OUTPUT);
+});
+
+test(`When only including language option`, () => {
+  expect(titleCase(INPUT, { language: 'en' })).toBe(TITLE_OUTPUT);
+});
+
+test(`When only including truecase option`, () => {
+  expect(titleCase(INPUT, { trueCasing: true })).toBe(TITLE_OUTPUT);
+});
+
+test(`When using an unsupported language`, () => {
+  expect(titleCase(INPUT, { language: '--' })).toBe(TITLE_OUTPUT);
 });
