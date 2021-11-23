@@ -14,7 +14,7 @@ const argumentValidator = ({ unformattedLanguage, trueCasing, properNouns }) => 
   }
 
   const invalidProperNouns = properNouns.filter((properNoun) => {
-    return !properNoun instanceof String;
+    return !(properNoun instanceof String);
   });
 
   if (invalidProperNouns.length > 0) {

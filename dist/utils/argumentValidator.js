@@ -26,7 +26,7 @@ var argumentValidator = function argumentValidator(_ref) {
   }
 
   var invalidProperNouns = properNouns.filter(function (properNoun) {
-    return !properNoun instanceof String;
+    return !(properNoun instanceof String);
   });
 
   if (invalidProperNouns.length > 0) {
