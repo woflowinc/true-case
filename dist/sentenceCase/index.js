@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _constants = require("../configs/constants");
 
+var _argumentValidator = _interopRequireDefault(require("../utils/argumentValidator"));
+
 var _casingConditions = require("../utils/casingConditions");
 
 var _helpers = require("../utils/helpers");
@@ -24,6 +26,11 @@ var sentenceCase = function sentenceCase(string) {
       _ref$properNouns = _ref.properNouns,
       properNouns = _ref$properNouns === void 0 ? [] : _ref$properNouns;
 
+  (0, _argumentValidator["default"])({
+    unformattedLanguage: unformattedLanguage,
+    trueCasing: trueCasing,
+    properNouns: properNouns
+  });
   var wordObjects = (0, _wordObjectsBuilder["default"])({
     string: string,
     unformattedLanguage: unformattedLanguage,
