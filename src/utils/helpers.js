@@ -10,7 +10,8 @@ const firstValidCharIndex = (word) => {
 
 const isWhitelistedSmallWord = ({ word, language, region }) => {
   const smallWordsList = smallWords[language] || smallWords[DEFAULT_LANGUAGE];
-  return smallWordsList.indexOf(word) >= 0;
+  const regexList = smallWordsList.map((smallWord) => new RegExp(`^${smallWord}$`));
+  return regexList.some((rx) => rx.test(word));
 };
 
 const isSentenceBoundary = ({ word, language }) => {

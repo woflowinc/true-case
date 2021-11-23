@@ -108,6 +108,10 @@ export default [
           input: 'bacon et oeufs',
           output: 'Bacon et Oeufs',
         },
+        {
+          input: "Petit a petit, l'oiseau fait son nid",
+          output: "Petit a Petit, l'oiseau Fait Son Nid",
+        },
       ],
     },
   },
