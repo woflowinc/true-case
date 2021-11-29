@@ -65,7 +65,8 @@ exports.isSentenceBoundary = isSentenceBoundary;
 var formatLanguage = function formatLanguage() {
   var unformattedLanguage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _constants.DEFAULT_LANGUAGE;
 
-  var _unformattedLanguage$ = unformattedLanguage.toLowerCase().split('_'),
+  // supports case insensitive language formats such as: "en_us" and "en-us"
+  var _unformattedLanguage$ = unformattedLanguage.toLowerCase().split(/[_-]/),
       _unformattedLanguage$2 = _slicedToArray(_unformattedLanguage$, 2),
       language = _unformattedLanguage$2[0],
       region = _unformattedLanguage$2[1];

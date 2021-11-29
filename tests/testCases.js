@@ -49,6 +49,11 @@ export default [
           output: 'This is a McDonalds McChicken Sandwich with Fries',
           properNouns: ['McDonalds', 'McChicken'],
         },
+        {
+          input: 'this is a test',
+          output: 'This IS a Test',
+          properNouns: ['IS'],
+        },
       ],
       sentenceCase: [
         {

@@ -25,7 +25,8 @@ const isSentenceBoundary = ({ word, language }) => {
 };
 
 const formatLanguage = (unformattedLanguage = DEFAULT_LANGUAGE) => {
-  const [language, region] = unformattedLanguage.toLowerCase().split('_');
+  // supports case insensitive language formats such as: "en_us" and "en-us"
+  const [language, region] = unformattedLanguage.toLowerCase().split(/[_-]/);
   return { language, region };
 };
 
