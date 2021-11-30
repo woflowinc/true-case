@@ -1,6 +1,6 @@
 {
   "name": "true-case",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Sentence case and title case with multi-language support",
   "main": "index.js",
   "scripts": {
