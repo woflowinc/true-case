@@ -96,6 +96,31 @@ export default [
           properNouns: ['McDonalds', 'McChicken'],
         },
       ],
+      trueCase: [
+        {
+          input: 'THIS IS A TEST',
+          output: 'this is a test',
+        },
+        {
+          input: 'this is a test',
+          output: 'this is a test',
+        },
+        {
+          input: 'THIS IS A MCDONALDS MCCHICKEN SANDWICH WITH FRIES',
+          output: 'this is a McDonalds McChicken sandwich with fries',
+          properNouns: ['McDonalds', 'McChicken'],
+        },
+        {
+          input: 'this is a mcdonalds mcchicken sandwich with fries',
+          output: 'this is a McDonalds McChicken sandwich with fries',
+          properNouns: ['McDonalds', 'McChicken'],
+        },
+        {
+          input: 'this is a McDonalds McChicken sandwich with fries',
+          output: 'this is a McDonalds McChicken sandwich with fries',
+          trueCasing: true,
+        },
+      ],
     },
   },
   {

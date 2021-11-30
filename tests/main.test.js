@@ -1,4 +1,4 @@
-import { titleCase, sentenceCase } from 'true-case';
+import { titleCase, sentenceCase, trueCase } from 'true-case';
 import testCases from './testCases';
 
 const INPUT = 'this is a test';
@@ -11,6 +11,8 @@ const functionSelector = (casingType) => {
       return titleCase;
     case 'sentenceCase':
       return sentenceCase;
+    case 'trueCase':
+      return trueCase;
 
     default:
       break;

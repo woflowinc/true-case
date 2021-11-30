@@ -4,10 +4,13 @@
 
 1. Sentence Casing
 2. Title Casing
+3. True Case
 
 ## Usage
 
 ### Title Case
+
+Capitalize the first charecter of all words, except for language specfific words to leave lowercase.
 
 ```javascript
 import { titleCase } from 'true-case';
@@ -25,6 +28,8 @@ This is a Sentence. This is Another Sentence.
 
 ### Sentence Case
 
+Capitalize the first charecter of the first word of each sentence.
+
 ```javascript
 import { sentenceCase } from 'true-case';
 
@@ -37,6 +42,24 @@ Output
 
 ```
 This is a sentence. This is another sentence.
+```
+
+### True Case
+
+Keep all charecters lowercase except for specified proper nouns.
+
+```javascript
+import { trueCase } from 'true-case';
+
+const string = 'This is a McDonalds McChicken sandwich with fries';
+
+sentenceCase(string, { properNouns: ['McDonalds', 'McChicken'] });
+```
+
+Output
+
+```
+this is a McDonalds McChicken sandwich with fries
 ```
 
 ## API

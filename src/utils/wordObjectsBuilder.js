@@ -14,7 +14,7 @@ const wordObjectsBuilder = ({ string, unformattedLanguage, trueCasing, properNou
   const words = string.split(' ');
 
   return words.map((word, index) => {
-    // Maintain raw casing if proper noun
+    // Maintain raw casing if proper noun, otherwise lowercase it
     const value = casedValue({ word, trueCasing, properNouns });
 
     // is directly after a word boundary or is the beginning of a quoted string

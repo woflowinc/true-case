@@ -15,9 +15,17 @@ Object.defineProperty(exports, "titleCase", {
     return _titleCase["default"];
   }
 });
+Object.defineProperty(exports, "trueCase", {
+  enumerable: true,
+  get: function get() {
+    return _trueCase["default"];
+  }
+});
 
 var _titleCase = _interopRequireDefault(require("./titleCase"));
 
 var _sentenceCase = _interopRequireDefault(require("./sentenceCase"));
+
+var _trueCase = _interopRequireDefault(require("./trueCase"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
