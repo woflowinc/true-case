@@ -156,6 +156,12 @@ Notice `mcdonalds` is all lowercased on the input but transforms into the casing
 $ npm install true-case
 ```
 
+## Publish New Version
+
+```
+$ npm bump-n-pub
+```
+
 ## License
 
 MIT
