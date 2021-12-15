@@ -204,4 +204,29 @@ export default [
       ],
     },
   },
+  {
+    language: 'pt',
+    cases: {
+      titleCase: [
+        {
+          input: 'spam e eggs',
+          output: 'Spam e Eggs',
+        },
+        {
+          input: 'ovos com queijo',
+          output: 'Ovos com Queijo',
+        },
+        {
+          input: 'ovos c/ queijo',
+          output: 'Ovos c/ Queijo',
+        },
+      ],
+      sentenceCase: [
+        {
+          input: 'spam e eggs',
+          output: 'Spam e eggs',
+        },
+      ],
+    },
+  },
 ];
