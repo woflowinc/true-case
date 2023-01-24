@@ -3,6 +3,12 @@ const _noValidChars = (wordObject) => {
   return wordObject.firstValidCharIndex < 0;
 };
 
+const _numberPresentBeforeValidChar = (wordObject) => {
+  return wordObject.value
+    .substring(0, wordObject.firstValidCharIndex)
+    .match(/\d/);
+};
+
 // All words (including whitelisted words) are capitalized at the beginning of a sentence
 const _firstWordOfSentence = (wordObject) => {
   return wordObject.firstWordOfSentence;
@@ -20,6 +26,7 @@ const _whitelistedWord = (wordObject) => {
 
 const shouldTitleCaseCapitalize = (wordObject) => {
   if (_noValidChars(wordObject)) return false;
+  if (_numberPresentBeforeValidChar(wordObject)) return false;
   if (_lastWordOfSentence(wordObject)) return true;
   if (_firstWordOfSentence(wordObject)) return true;
   if (_whitelistedWord(wordObject)) return false;
@@ -30,6 +37,7 @@ const shouldTitleCaseCapitalize = (wordObject) => {
 
 const shouldSentenceCaseCapitalize = (wordObject) => {
   if (_noValidChars(wordObject)) return false;
+  if (_numberPresentBeforeValidChar(wordObject)) return false;
   if (_firstWordOfSentence(wordObject)) return true;
 
   // All other word should be lowercase

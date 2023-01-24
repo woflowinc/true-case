@@ -1,17 +1,17 @@
-import { titleCase, sentenceCase, trueCase } from 'true-case';
-import testCases from './testCases';
+import { titleCase, sentenceCase, trueCase } from "true-case";
+import testCases from "./testCases";
 
-const INPUT = 'this is a test';
-const SENTENCE_OUTPUT = 'This is a test';
-const TITLE_OUTPUT = 'This is a Test';
+const INPUT = "this is a test";
+const SENTENCE_OUTPUT = "This is a test";
+const TITLE_OUTPUT = "This is a Test";
 
 const functionSelector = (casingType) => {
   switch (casingType) {
-    case 'titleCase':
+    case "titleCase":
       return titleCase;
-    case 'sentenceCase':
+    case "sentenceCase":
       return sentenceCase;
-    case 'trueCase':
+    case "trueCase":
       return trueCase;
 
     default:
@@ -44,7 +44,7 @@ test(`When not including any options`, () => {
 });
 
 test(`When only including language option`, () => {
-  expect(titleCase(INPUT, { language: 'en' })).toBe(TITLE_OUTPUT);
+  expect(titleCase(INPUT, { language: "en" })).toBe(TITLE_OUTPUT);
 });
 
 test(`When only including truecase option`, () => {
@@ -52,5 +52,5 @@ test(`When only including truecase option`, () => {
 });
 
 test(`When using an unsupported language`, () => {
-  expect(titleCase(INPUT, { language: '--' })).toBe(TITLE_OUTPUT);
+  expect(titleCase(INPUT, { language: "--" })).toBe(TITLE_OUTPUT);
 });

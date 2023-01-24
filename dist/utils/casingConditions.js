@@ -8,6 +8,10 @@ exports.shouldTitleCaseCapitalize = exports.shouldSentenceCaseCapitalize = void 
 // no char available to capitalize
 var _noValidChars = function _noValidChars(wordObject) {
   return wordObject.firstValidCharIndex < 0;
+};
+
+var _numberPresentBeforeValidChar = function _numberPresentBeforeValidChar(wordObject) {
+  return wordObject.value.substring(0, wordObject.firstValidCharIndex).match(/\d/);
 }; // All words (including whitelisted words) are capitalized at the beginning of a sentence
 
 
@@ -27,6 +31,7 @@ var _whitelistedWord = function _whitelistedWord(wordObject) {
 
 var shouldTitleCaseCapitalize = function shouldTitleCaseCapitalize(wordObject) {
   if (_noValidChars(wordObject)) return false;
+  if (_numberPresentBeforeValidChar(wordObject)) return false;
   if (_lastWordOfSentence(wordObject)) return true;
   if (_firstWordOfSentence(wordObject)) return true;
   if (_whitelistedWord(wordObject)) return false; // All other words should be capitalized
@@ -38,6 +43,7 @@ exports.shouldTitleCaseCapitalize = shouldTitleCaseCapitalize;
 
 var shouldSentenceCaseCapitalize = function shouldSentenceCaseCapitalize(wordObject) {
   if (_noValidChars(wordObject)) return false;
+  if (_numberPresentBeforeValidChar(wordObject)) return false;
   if (_firstWordOfSentence(wordObject)) return true; // All other word should be lowercase
 
   return false;

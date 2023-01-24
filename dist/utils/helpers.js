@@ -40,7 +40,7 @@ var isWhitelistedSmallWord = function isWhitelistedSmallWord(_ref) {
       region = _ref.region;
   var smallWordsList = _smallWords["default"][language] || _smallWords["default"][_constants.DEFAULT_LANGUAGE];
   var regexList = smallWordsList.map(function (smallWord) {
-    return new RegExp("^".concat(smallWord, "$"), 'i');
+    return new RegExp("^".concat(smallWord, "$"), "i");
   });
   return regexList.some(function (rx) {
     return rx.test(word);
@@ -80,10 +80,10 @@ var formatLanguage = function formatLanguage() {
 exports.formatLanguage = formatLanguage;
 
 var capitalizedWord = function capitalizedWord(wordObject) {
-  var chars = wordObject.value.split('');
+  var chars = wordObject.value.split("");
   var index = wordObject.firstValidCharIndex;
   chars[index] = chars[index].toUpperCase();
-  return chars.join('');
+  return chars.join("");
 };
 
 exports.capitalizedWord = capitalizedWord;
@@ -94,7 +94,7 @@ var _properNounMatch = function _properNounMatch(_ref3) {
   var regexList = properNouns.map(function (properNoun) {
     return {
       value: properNoun,
-      reg: new RegExp("^".concat(properNoun.toLowerCase(), "$"), 'i')
+      reg: new RegExp("^".concat(properNoun.toLowerCase(), "$"), "i")
     };
   });
   return regexList.find(function (properNounData) {

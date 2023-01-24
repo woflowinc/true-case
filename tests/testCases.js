@@ -54,6 +54,10 @@ export default [
           output: "This IS a Test",
           properNouns: ["IS"],
         },
+        {
+          input: "10ml",
+          output: "10ml",
+        },
       ],
       sentenceCase: [
         {
@@ -96,6 +100,10 @@ export default [
           input: "THIS IS A MCDONALDS MCCHICKEN SANDWICH WITH FRIES",
           output: "This is a McDonalds McChicken sandwich with fries",
           properNouns: ["McDonalds", "McChicken"],
+        },
+        {
+          input: "10ml",
+          output: "10ml",
         },
       ],
       trueCase: [

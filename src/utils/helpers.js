@@ -1,7 +1,7 @@
-import abbreviations from '../configs/abbreviations';
-import { DEFAULT_LANGUAGE } from '../configs/constants';
-import smallWords from '../configs/smallWords';
-import wordBoundaryChars from '../configs/wordBoundaryChars';
+import abbreviations from "../configs/abbreviations";
+import { DEFAULT_LANGUAGE } from "../configs/constants";
+import smallWords from "../configs/smallWords";
+import wordBoundaryChars from "../configs/wordBoundaryChars";
 
 const firstValidCharIndex = (word) => {
   const reg = new RegExp(/[\p{L}]/u);
@@ -10,7 +10,9 @@ const firstValidCharIndex = (word) => {
 
 const isWhitelistedSmallWord = ({ word, language, region }) => {
   const smallWordsList = smallWords[language] || smallWords[DEFAULT_LANGUAGE];
-  const regexList = smallWordsList.map((smallWord) => new RegExp(`^${smallWord}$`, 'i'));
+  const regexList = smallWordsList.map(
+    (smallWord) => new RegExp(`^${smallWord}$`, "i")
+  );
   return regexList.some((rx) => rx.test(word));
 };
 
@@ -20,7 +22,8 @@ const isSentenceBoundary = ({ word, language }) => {
 
   // Is the boundary word actually just an abbreviation?
   // Ex: "12 oz. steak" - "oz." is not the end of the sentence
-  const abbreviationsList = abbreviations[language] || abbreviations[DEFAULT_LANGUAGE];
+  const abbreviationsList =
+    abbreviations[language] || abbreviations[DEFAULT_LANGUAGE];
   return abbreviationsList.indexOf(word) < 0;
 };
 
@@ -31,17 +34,17 @@ const formatLanguage = (unformattedLanguage = DEFAULT_LANGUAGE) => {
 };
 
 const capitalizedWord = (wordObject) => {
-  const chars = wordObject.value.split('');
+  const chars = wordObject.value.split("");
   const index = wordObject.firstValidCharIndex;
   chars[index] = chars[index].toUpperCase();
-  return chars.join('');
+  return chars.join("");
 };
 
 const _properNounMatch = ({ word, properNouns }) => {
   const regexList = properNouns.map((properNoun) => {
     return {
       value: properNoun,
-      reg: new RegExp(`^${properNoun.toLowerCase()}$`, 'i'),
+      reg: new RegExp(`^${properNoun.toLowerCase()}$`, "i"),
     };
   });
 
