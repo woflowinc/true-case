@@ -11,7 +11,7 @@ const wordObjectsBuilder = ({ string, unformattedLanguage, trueCasing, properNou
 
   const { language, region } = formatLanguage(unformattedLanguage);
   var activeSentenceBoundary = true;
-  const words = string.split(' ');
+  const words = string.split(/(?=[\n])| /);
 
   return words.map((word, index) => {
     // Maintain raw casing if proper noun, otherwise lowercase it

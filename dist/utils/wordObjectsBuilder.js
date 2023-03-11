@@ -19,7 +19,7 @@ var wordObjectsBuilder = function wordObjectsBuilder(_ref) {
       region = _formatLanguage.region;
 
   var activeSentenceBoundary = true;
-  var words = string.split(' ');
+  var words = string.split(/(?=[\n])| /);
   return words.map(function (word, index) {
     // Maintain raw casing if proper noun, otherwise lowercase it
     var value = (0, _helpers.casedValue)({

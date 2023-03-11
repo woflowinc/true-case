@@ -8,6 +8,10 @@ export default [
           output: "And I Love You!",
         },
         {
+          input: "and\ni love you!",
+          output: "And \nI Love You!",
+        },
+        {
           input: "the challenge of",
           output: "The Challenge Of",
         },
@@ -66,9 +70,9 @@ export default [
         },
         {
           input:
-            'he walked in. "hi," he said! she replied, "yes?" "oh, nevermind."',
+            'he walked in. "hi," he said!\nshe replied, "yes?" "oh, nevermind."',
           output:
-            'He walked in. "Hi," he said! She replied, "Yes?" "Oh, nevermind."',
+            'He walked in. "Hi," he said! \nShe replied, "Yes?" "Oh, nevermind."',
         },
         {
           input: "the 12 oz. drink was cold",
