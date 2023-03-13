@@ -36,6 +36,10 @@ export default [
           output: "This is a Test",
         },
         {
+          input: "this\nis\na\ntest",
+          output: "This \nIs \nA \nTest",
+        },
+        {
           input: "",
           output: "",
         },
@@ -70,9 +74,9 @@ export default [
         },
         {
           input:
-            'he walked in. "hi," he said!\nshe replied, "yes?" "oh, nevermind."',
+            'he walked in. "hi," he said! she replied, "yes?" "oh, nevermind."',
           output:
-            'He walked in. "Hi," he said! \nShe replied, "Yes?" "Oh, nevermind."',
+            'He walked in. "Hi," he said! She replied, "Yes?" "Oh, nevermind."',
         },
         {
           input: "the 12 oz. drink was cold",
@@ -81,6 +85,10 @@ export default [
         {
           input: "We can't stop",
           output: "We can't stop",
+        },
+        {
+          input: "We.\ncan't.\nstop",
+          output: "We. \nCan't. \nStop",
         },
         {
           input: "",
