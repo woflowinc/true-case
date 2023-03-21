@@ -8,6 +8,10 @@ export default [
           output: "And I Love You!",
         },
         {
+          input: "and\ni love you!",
+          output: "And \nI Love You!",
+        },
+        {
           input: "the challenge of",
           output: "The Challenge Of",
         },
@@ -30,6 +34,10 @@ export default [
         {
           input: "this is a test",
           output: "This is a Test",
+        },
+        {
+          input: "this\nis\na\ntest",
+          output: "This \nIs \nA \nTest",
         },
         {
           input: "",
@@ -77,6 +85,10 @@ export default [
         {
           input: "We can't stop",
           output: "We can't stop",
+        },
+        {
+          input: "We.\ncan't.\nstop",
+          output: "We. \nCan't. \nStop",
         },
         {
           input: "",
